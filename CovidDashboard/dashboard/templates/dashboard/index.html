@@ -1,12 +1,12 @@
-{% if news_list %}
+{% if persons_list %}
   <ul>
-  {% for elem in news_list %}
+  {% for elem in persons_list %}
     <li>
-      <h3>{{ elem.title }}</h3>
-      <p>{{ elem.content }}</p>
+      <h3>{{ elem.name }}</h3>
+      <p>{{ elem.gender }}</p>
     </li>
   {% endfor %}
   </ul>
 {% else %}
-  <p>暂无新闻</p>
+  <p>No Data</p>
 {% endif %}
