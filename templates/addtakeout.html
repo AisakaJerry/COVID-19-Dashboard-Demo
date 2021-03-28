@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addtakeout</title>
+</head>
+<body>
+    {% block content %}
+        <h4>add new takeout data</h4>
+        <form action="{% url 'addtakeout' %}" method='post'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button name="submit">add takeout data</button>
+        </form>
+    {% endblock content %}
+</body>
+</html>

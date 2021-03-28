@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+    <!--leave four lines at the top of the page-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--COVID-19 font style-->
+    <div align="center"><img src="/static/images/COVID-19%20font%20style.jpg" alt="COVID-19" width="45%" height="45%"/></div>
+    <br>
+    <br>
+    <br>
+    <div style="text-align:center">
+        <!--click hypertext 'more sync data' and then jump to syncdata.html-->
+        <a href="{% url 'syncdata' %}" target="_parent">more sync data></a>
+        <br>
+        <!--#click button 'get new sync data' and then jump to getsync.html-->
+        <form action="getsync" method="get">
+            <button name="getsync" type="submit" value="Submit">get sync data</button>
+        </form>
+        <br>
+        <!--click hypertext 'more takeout data' and then jump to takeout.html-->
+        <a href="{% url 'takeoutdata' %}" target="_parent">more takeout data></a>
+        <br>
+        <!--#click button 'add new takeout data' and then jump to addtakeout.html-->
+        <form action="addtakeout" method="get">
+            <button name="addtakeout" type="submit" value="Submit">add takeout data</button>
+        </form>
+    </div>
+</body>
+</html>

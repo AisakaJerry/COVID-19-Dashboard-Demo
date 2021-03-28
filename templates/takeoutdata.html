@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>takeoutdata</title>
+</head>
+<body>
+    {% block content %}
+        {% if takeoutdata_list %}
+            <ul>
+                {% for takeoutdata in takeoutdata_list %}
+                    <li>
+                        <h3>{{takeoutdata.restaurant_name}}</h3>
+                        <p>{{takeoutdata.dishes}}</p>
+                        <p>{{takeoutdata.date}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No takeout data have been added.</p>
+        {% endif %}
+        <a href="{% url 'addtakeout' %}">add takeout data</a>
+    {% endblock content %}
+</body>
+</html>
