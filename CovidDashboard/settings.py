@@ -56,7 +56,7 @@ ROOT_URLCONF = 'CovidDashboard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['E:/6234-Object-Oriented Design/final project/MyCOVIDDashboard/CovidDashboard',],
+        'DIRS': [os.path.join(BASE_DIR)],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
