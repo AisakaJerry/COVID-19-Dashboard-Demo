@@ -25,4 +25,6 @@ urlpatterns = [
     path('takeoutdata/',views.takeoutdata,name='takeoutdata'),
     #click button 'add new sync data' and then jump to addtakeout.html
     path('addtakeout/',views.addtakeout,name='addtakeout'),
+
+    path('getLocalData/', views.getLocalData, name='getLocalData'),
 ]

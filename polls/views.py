@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Takeout
 from .forms import TopicForm
+from django.views.generic import View
+from .forms import SelectStateForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -49,3 +51,21 @@ def addtakeout(request):
 
     context={'form':form}
     return render(request,'templates/addtakeout.html',context)
+
+def getLocalData(request):
+    select_form = SelectStateForm()
+    return render(request, 'templates/getLocalData.html', {
+        'select_form': select_form,
+    })
+
+def postLocalData(request):
+    select_form = SelectStateForm(request.POST)
+    if select_form.is_valid():
+        get_value = request.POST.get('sel_value', "")
+        # other logic
+    else:
+        # return error
+        pass
+
+def checkCovidLikelihood(request):
+    pass
