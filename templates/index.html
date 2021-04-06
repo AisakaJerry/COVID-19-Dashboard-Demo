@@ -32,8 +32,44 @@
             <button name="addtakeout" type="submit" value="Submit">add takeout data</button>
         </form>
         <br>
-        <form action="getLocalData" method="get">
-            <button name="getLocalData" type="submit" value="test">getLocalData</button>
+        <!--click hypertext 'more doctor visit data' and then jump to doctorvisitdata.html-->
+        <a href="{% url 'doctorvisitdata' %}" target="_parent">more doctor visit data></a>
+        <br>
+        <!--#click button 'add new doctor visit data' and then jump to adddoctorvisit.html-->
+        <form action="adddoctorvisit" method="get">
+            <button name="adddoctorvisit" type="submit" value="Submit">add doctor visit data</button>
+        </form>
+        <br>
+        <!--click hypertext 'more symptom data' and then jump to symptomdata.html-->
+        <a href="{% url 'symptomdata' %}" target="_parent">more symptom data></a>
+        <br>
+        <!--#click button 'add new symptom data' and then jump to addsymptom.html-->
+        <form action="addsymptom" method="get">
+            <button name="addsymptom" type="submit" value="Submit">add symptom data</button>
+        </form>
+        <br>
+        <!--click hypertext 'more medicine history data' and then jump to medicinehistorydata.html-->
+        <a href="{% url 'medicinehistorydata' %}" target="_parent">more medicine history data></a>
+        <br>
+        <!--#click button 'add new medicine history data' and then jump to addmedicinehistory.html-->
+        <form action="addmedicinehistory" method="get">
+            <button name="addmedicinehistory" type="submit" value="Submit">add medicine history data</button>
+        </form>
+        <br>
+        <!--click hypertext 'more surrounding situation data' and then jump to surroundingsituationdata.html-->
+        <a href="{% url 'surroundingsituationdata' %}" target="_parent">more surrounding situation data></a>
+        <br>
+        <!--#click button 'add new surrounding situation data' and then jump to addsurroundingsituation.html-->
+        <form action="addsurroundingsituation" method="get">
+            <button name="addsurroundingsituation" type="submit" value="Submit">add surrounding situation data</button>
+        </form>
+        <br>
+        <!--click hypertext 'more trip data' and then jump to tripdata.html-->
+        <a href="{% url 'tripdata' %}" target="_parent">more trip data></a>
+        <br>
+        <!--#click button 'add new trip data' and then jump to addtrip.html-->
+        <form action="addtrip" method="get">
+            <button name="addtrip" type="submit" value="Submit">add trip data</button>
         </form>
     </div>
 </body>

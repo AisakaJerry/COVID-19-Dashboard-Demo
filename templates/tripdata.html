@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tripdata</title>
+</head>
+<body>
+    {% block content %}
+        <!--if there is any trip data, list all of them-->
+        {% if trip_list %}
+            <ul>
+                {% for trip in trip_list %}
+                    <li>
+                        <h3>{{trip.location}}</h3>
+                        <p>{{trip.departure_date}}</p>
+                        <p>lasting day(s): {{trip.lasting_day}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No trip data have been added.</p>
+        {% endif %}
+        <!--hyptertext for adding new trip data-->
+        <a href="{% url 'addtrip' %}">add trip data</a>
+    {% endblock content %}
+    <br>
+    <br>
+    <form action="{% url 'index' %}" method="get">
+        <button name="home" type="submit" value="Submit">home</button>
+    </form>
+</body>
+</html>

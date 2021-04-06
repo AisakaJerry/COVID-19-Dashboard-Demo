@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>symptomdata</title>
+</head>
+<body>
+    {% block content %}
+        <!--if there is any symptom data, list all of them-->
+        {% if symptom_list %}
+            <ul>
+                {% for symptom in symptom_list %}
+                    <li>
+                        <p><b>body temperature:</b> {{symptom.body_temperature}}</p>
+                        <p><b>cough severity:</b>
+                            {% if symptom.cough_severity == 0 %}
+                                Never
+                                {% elif symptom.cough_severity == 1 %}
+                                    Almost never
+                                {% elif symptom.cough_severity == 2 %}
+                                    Sometimes
+                                {% elif symptom.cough_severity == 3 %}
+                                    Almost always
+                                {% else %}
+                                    Always
+                            {% endif %}
+                        </p>
+                        <p><b>date:</b> {{symptom.date}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No symptom data have been added.</p>
+        {% endif %}
+        <!--hyptertext for adding new symptom data-->
+        <a href="{% url 'addsymptom' %}">add symptom data</a>
+    {% endblock content %}
+    <br>
+    <br>
+    <form action="{% url 'index' %}" method="get">
+        <button name="home" type="submit" value="Submit">home</button>
+    </form>
+</body>
+</html>

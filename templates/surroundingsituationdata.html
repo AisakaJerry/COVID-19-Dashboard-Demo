@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>surroundingsituationdata</title>
+</head>
+<body>
+    {% block content %}
+        <!--if there is any surrounding situation data, list all of them-->
+        {% if surroundingsituation_list %}
+            <ul>
+                {% for surroundingsituation in surroundingsituation_list %}
+                    <li>
+                        <h3>{{surroundingsituation.positive_people_name}}</h3>
+                        <p>{{surroundingsituation.last_meet_date}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No surrounding situation data have been added.</p>
+        {% endif %}
+        <!--hyptertext for adding new surrounding situation data-->
+        <a href="{% url 'addsurroundingsituation' %}">add surrounding situation data</a>
+    {% endblock content %}
+    <br>
+    <br>
+    <form action="{% url 'index' %}" method="get">
+        <button name="home" type="submit" value="Submit">home</button>
+    </form>
+</body>
+</html>
