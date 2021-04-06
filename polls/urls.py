@@ -17,14 +17,18 @@ urlpatterns = [
     path('<int:question_id>/results/', views.results, name='results'),
     # ex: /polls/5/vote/
     path('<int:question_id>/vote/', views.vote, name='vote'),
-    #click hypertext 'more sync data' and then jump to syncdata.html
     path('syncdata/',views.syncdata,name='syncdata'),
-    #click button 'get new sync data' and then jump to getsync.html
     path('getsync/',views.getsync,name='getsync'),
-    #click hypertext 'more takeout data' and then jump to takeoutdata.html
     path('takeoutdata/',views.takeoutdata,name='takeoutdata'),
-    #click button 'add new sync data' and then jump to addtakeout.html
     path('addtakeout/',views.addtakeout,name='addtakeout'),
-
-    path('getLocalData/', views.getLocalData, name='getLocalData'),
+    path('doctorvisitdata/',views.doctorvisitdata,name='doctorvisitdata'),
+    path('adddoctorvisit/',views.adddoctorvisit,name='adddoctorvisit'),
+    path('symptomdata/',views.symptomdata,name='symptomdata'),
+    path('addsymptom/',views.addsymptom,name='addsymptom'),
+    path('medicinehistorydata/',views.medicinehistorydata,name='medicinehistorydata'),
+    path('addmedicinehistory/',views.addmedicinehistory,name='addmedicinehistory'),
+    path('surroundingsituationdata/',views.surroundingsituationdata,name='surroundingsituationdata'),
+    path('addsurroundingsituation/',views.addsurroundingsituation,name='addsurroundingsituation'),
+    path('tripdata/',views.tripdata,name='tripdata'),
+    path('addtrip/',views.addtrip,name='addtrip'),
 ]
