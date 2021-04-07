@@ -5,6 +5,9 @@ from .forms import TopicFormTakeout,TopicFormDoctorVisit,TopicFormSymptom,TopicF
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from django.views.generic import View
+from .forms import SelectStateForm
+
 # Create your views here.
 def detail(request, question_id):
     return HttpResponse("You're looking at question %s." % question_id)
@@ -153,3 +156,21 @@ def addtrip(request):
             return HttpResponseRedirect(reverse('tripdata'))
     context={'form':form}
     return render(request,'templates/addtrip.html',context)
+
+def getLocalData(request):
+    select_form = SelectStateForm()
+    return render(request, 'templates/getLocalData.html', {
+        'select_form': select_form,
+    })
+
+def postLocalData(request):
+    select_form = SelectStateForm(request.POST)
+    if select_form.is_valid():
+        get_value = request.POST.get('sel_value', "")
+        # other logic
+    else:
+        # return error
+        pass
+
+def checkCovidLikelihood(request):
+    pass 

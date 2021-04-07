@@ -1,5 +1,5 @@
 from django import forms
-from .models import Takeout,DoctorVisit,Symptom,MedicineHistory,SurroundingSituation,Trip
+from .models import Takeout,DoctorVisit,Symptom,MedicineHistory,SurroundingSituation,Trip, State
 import datetime
 today=datetime.date.today()
 this_month=today.month
@@ -41,3 +41,7 @@ class TopicFormTrip(forms.ModelForm):
     class Meta:
         model=Trip
         fields=['location','departure_date','lasting_day']
+
+class SelectStateForm(forms.Form):
+    SELVALUE = State.SELVALUE
+    sel_value = forms.CharField(max_length=10, widget=forms.widgets.Select(choices=SELVALUE))
