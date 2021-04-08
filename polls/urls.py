@@ -30,7 +30,5 @@ urlpatterns = [
     path('surroundingsituationdata/',views.surroundingsituationdata,name='surroundingsituationdata'),
     path('addsurroundingsituation/',views.addsurroundingsituation,name='addsurroundingsituation'),
     path('tripdata/',views.tripdata,name='tripdata'),
-    path('addtrip/',views.addtrip,name='addtrip'),
-    
-    path('getLocalData/', views.getLocalData, name='getLocalData'),
+    path('likelihood/',views.likelihood,name='likelihood'),
 ]

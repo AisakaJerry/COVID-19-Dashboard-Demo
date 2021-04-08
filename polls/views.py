@@ -4,9 +4,7 @@ from .models import Takeout,DoctorVisit,Symptom,MedicineHistory,SurroundingSitua
 from .forms import TopicFormTakeout,TopicFormDoctorVisit,TopicFormSymptom,TopicFormMedicineHistory,TopicFormSurroundingSituation,TopicFormTrip
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
-from django.views.generic import View
-from .forms import SelectStateForm
+import datetime
 
 # Create your views here.
 def detail(request, question_id):
@@ -157,20 +155,26 @@ def addtrip(request):
     context={'form':form}
     return render(request,'templates/addtrip.html',context)
 
-def getLocalData(request):
-    select_form = SelectStateForm()
-    return render(request, 'templates/getLocalData.html', {
-        'select_form': select_form,
-    })
-
-def postLocalData(request):
-    select_form = SelectStateForm(request.POST)
-    if select_form.is_valid():
-        get_value = request.POST.get('sel_value', "")
-        # other logic
-    else:
-        # return error
-        pass
-
-def checkCovidLikelihood(request):
-    pass 
+def likelihood(request):
+    #the initial likelihood is 20%
+    COVID_likelihood=20
+    #get the last symptom data
+    numbers_symptom=Symptom.objects.count()
+    last_symptom=Symptom.objects.all()[numbers_symptom-1]
+    #get the body temperature and cough serverity of the last symptom data
+    last_body_temperature=last_symptom.body_temperature
+    last_cough_severity=last_symptom.cough_severity
+    #if the body temperatrue is more than 38 AND the cough severity is almost always or always, the likelihood should be 60%
+    if last_body_temperature>=38 and (last_cough_severity==4 or last_cough_severity==5):
+        COVID_likelihood=60
+    #if the body temperatrue is more than 38 OR the cough severity is almost always or always, the likelihood should be 40%
+    elif last_body_temperature>=38 or (last_cough_severity==4 or last_cough_severity==5):
+        COVID_likelihood=40
+    #if the last surrounding situation data is not earlier than 14 days, add 10% to the likelihood
+    numbers_surrounding_situation=SurroundingSituation.objects.count()
+    last_surrounding_situation=SurroundingSituation.objects.all()[numbers_surrounding_situation-1]
+    today=datetime.date.today()
+    if today-datetime.timedelta(days=14)<=last_surrounding_situation.last_meet_date:
+        COVID_likelihood+=10
+    context={'COVID_likelihood':COVID_likelihood}
+    return render(request,'templates/likelihood.html',context)
