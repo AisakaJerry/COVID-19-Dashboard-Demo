@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addtrip</title>
+</head>
+<body>
+    {% block content %}
+        <h4>add new trip data</h4>
+        <form action="{% url 'addtrip' %}" method='post'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button name="submit">add trip data</button>
+        </form>
+    {% endblock content %}
+</body>
+</html>

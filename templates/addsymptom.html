@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addsymptom</title>
+</head>
+<body>
+    {% block content %}
+        <h4>add new symptom data</h4>
+        <form action="{% url 'addsymptom' %}" method='post'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button name="submit">add symptom data</button>
+        </form>
+    {% endblock content %}
+</body>
+</html>

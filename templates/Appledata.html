@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appledata</title>
+</head>
+<body>
+    {% block content %}
+        <!--if there is any Apple data, list all of them-->
+        {% if Apple_list %}
+            <ul>
+                {% for Apple in Apple_list %}
+                    <li>
+                        <p><b>steps:</b> {{Apple.steps}}</p>
+                        <p><b>distance:</b> {{Apple.distance}} miles</p>
+                        <p><b>floors:</b> {{Apple.floors}}</p>
+                        <p><b>calories</b> {{Apple.calories}}</p>
+                        <p><b>heart rate:</b> {{Apple.heart_rate}} BPM</p>
+                        <p><b>exercise minutes:</b> {{ Apple.exercise_minutes }}</p>
+                        <p><b>date:</b> {{Apple.date}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No Apple data have been added.</p>
+        {% endif %}
+        <!--hyptertext for getting new Apple data-->
+        <a href="{% url 'getApple' %}">get Apple data</a>
+    {% endblock content %}
+    <br>
+    <br>
+    <form action="{% url 'syncdata' %}" method="get">
+        <button name="synchome" type="submit" value="Submit">back to sync data</button>
+    </form>
+</body>
+</html>

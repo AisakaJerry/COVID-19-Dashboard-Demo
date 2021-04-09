@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>likelihood</title>
+</head>
+<body>
+    {% block content %}
+    <!--if the likelihood no less than 60%, the likelihood of infection is high-->
+    {% if COVID_likelihood >= 60 %}
+        <p style="color: red">High</p>
+    {% elif COVID_likelihood >= 20 %}
+        <p style="color: yellow">Medium</p>
+    {% else %}
+        <p style="color: green">Low</p>
+    {% endif %}
+    {% endblock content %}
+    <form action="{% url 'index' %}" method="get">
+        <button name="home" type="submit" value="Submit">home</button>
+    </form>
+</body>
+</html>

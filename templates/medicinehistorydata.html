@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>medicinehistorydata</title>
+</head>
+<body>
+    {% block content %}
+        <!--if there is any medicine history data, list all of them-->
+        {% if medicinehistory_list %}
+            <ul>
+                {% for medicinehistory in medicinehistory_list %}
+                    <li>
+                        <h3>{{medicinehistory.medicine_name}}</h3>
+                        <p>{{medicinehistory.start_date}}</p>
+                        <p>lasting day(s): {{medicinehistory.lasting_day}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No medicine history data have been added.</p>
+        {% endif %}
+        <!--hyptertext for adding new medicine history data-->
+        <a href="{% url 'addmedicinehistory' %}">add medicine history data</a>
+    {% endblock content %}
+    <br>
+    <br>
+    <form action="{% url 'index' %}" method="get">
+        <button name="home" type="submit" value="Submit">home</button>
+    </form>
+</body>
+</html>

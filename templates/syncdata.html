@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>syncdata</title>
+</head>
+<body>
+    <!--click hypertext 'more Fitbit data' and then jump to Fitbitdata.html-->
+    <a href="{% url 'Fitbitdata' %}" target="_parent">more Fitbit data></a>
+    <br>
+    <!--#click button 'get new Fitbit data' and then jump to getFitbit.html-->
+    <form action="getFitbit" method="get">
+        <button name="getFitbit" type="submit" value="Submit">get new Fitbit data</button>
+    </form>
+    <br>
+    <!--click hypertext 'more Apple data' and then jump to Appledata.html-->
+    <a href="{% url 'Appledata' %}" target="_parent">more Apple data></a>
+    <br>
+    <!--#click button 'get new Apple data' and then jump to getApple.html-->
+    <form action="getApple" method="get">
+        <button name="getApple" type="submit" value="Submit">get new Apple data</button>
+    </form>
+    <br>
+    <form action="{% url 'index' %}" method="get">
+        <button name="home" type="submit" value="Submit">home</button>
+    </form>
+</body>
+</html>

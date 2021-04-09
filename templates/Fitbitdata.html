@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fitbitdata</title>
+</head>
+<body>
+    {% block content %}
+        <!--if there is any Fitbit data, list all of them-->
+        {% if Fitbit_list %}
+            <ul>
+                {% for Fitbit in Fitbit_list %}
+                    <li>
+                        <p><b>steps:</b> {{Fitbit.steps}}</p>
+                        <p><b>calories</b> {{Fitbit.calories}}</p>
+                        <p><b>floors:</b> {{Fitbit.floors}}</p>
+                        <p><b>distance:</b> {{Fitbit.distance}} miles</p>
+                        <p><b>weight:</b> {{Fitbit.weight}} lb</p>
+                        <p><b>date:</b> {{Fitbit.date}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No Fitbit data have been added.</p>
+        {% endif %}
+        <!--hyptertext for getting new Fitbit data-->
+        <a href="{% url 'getFitbit' %}">get Fitbit data</a>
+    {% endblock content %}
+    <br>
+    <br>
+    <form action="{% url 'syncdata' %}" method="get">
+        <button name="synchome" type="submit" value="Submit">back to sync data</button>
+    </form>
+</body>
+</html>

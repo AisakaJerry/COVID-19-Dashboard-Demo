@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getApple</title>
+</head>
+<body>
+    {% block content %}
+        <h4>get new Apple data</h4>
+        <p>steps: {{ form.steps }}</p>
+        <p>distance: {{ form.distance }} miles</p>
+        <p>floors: {{ form.floors }}</p>
+        <p>calories: {{ form.calories }}</p>
+        <p>heart rate: {{ form.heart_rate }} BMP</p>
+        <p>exercise minutes: {{ form.exercise_minutes }}</p>
+        <p>date: {{ form.date }}</p>
+    {% endblock content %}
+    <br>
+    <br>
+    <form action="{% url 'Appledata' %}" method="get">
+        <button name="OK" type="submit" value="Submit">OK</button>
+    </form>
+</body>
+</html>

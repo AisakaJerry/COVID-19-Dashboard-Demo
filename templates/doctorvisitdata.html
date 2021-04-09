@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>doctorvisitdata</title>
+</head>
+<body>
+    {% block content %}
+        <!--if there is any doctor visit data, list all of them-->
+        {% if doctorvisit_list %}
+            <ul>
+                {% for doctorvisit in doctorvisit_list %}
+                    <li>
+                        <h3>{{doctorvisit.doctor_name}}</h3>
+                        <p>{{doctorvisit.date}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No doctor visit data have been added.</p>
+        {% endif %}
+        <!--hyptertext for adding new doctor visit data-->
+        <a href="{% url 'adddoctorvisit' %}">add doctor visit data</a>
+    {% endblock content %}
+</body>
+</html>

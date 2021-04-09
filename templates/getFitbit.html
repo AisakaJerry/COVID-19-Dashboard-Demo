@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getFitbit</title>
+</head>
+<body>
+    {% block content %}
+        <h4>get new Fitbit data</h4>
+        <p>steps: {{ form.steps }}</p>
+        <p>calories: {{ form.calories }}</p>
+        <p>floors: {{ form.floors }}</p>
+        <p>distance: {{ form.distance }} miles</p>
+        <p>weight: {{ form.weight }} lb</p>
+        <p>date: {{ form.date }}</p>
+    {% endblock content %}
+    <br>
+    <br>
+    <form action="{% url 'Fitbitdata' %}" method="get">
+        <button name="OK" type="submit" value="Submit">OK</button>
+    </form>
+</body>
+</html>
