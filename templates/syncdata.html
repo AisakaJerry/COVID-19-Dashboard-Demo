@@ -3,26 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <title>syncdata</title>
+    <style>
+        #multicentre{
+		    text-align:center
+		}
+        table{margin: auto}
+    </style>
+    <style>
+        .textonpic{
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <!--click hypertext 'more Fitbit data' and then jump to Fitbitdata.html-->
-    <a href="{% url 'Fitbitdata' %}" target="_parent">more Fitbit data></a>
     <br>
-    <!--#click button 'get new Fitbit data' and then jump to getFitbit.html-->
-    <form action="getFitbit" method="get">
-        <button name="getFitbit" type="submit" value="Submit">get new Fitbit data</button>
-    </form>
     <br>
-    <!--click hypertext 'more Apple data' and then jump to Appledata.html-->
-    <a href="{% url 'Appledata' %}" target="_parent">more Apple data></a>
     <br>
-    <!--#click button 'get new Apple data' and then jump to getApple.html-->
-    <form action="getApple" method="get">
-        <button name="getApple" type="submit" value="Submit">get new Apple data</button>
-    </form>
     <br>
-    <form action="{% url 'index' %}" method="get">
+    <div id="multicentre" class='header'>
+        <table>
+            <tr>
+                <td>
+                    <div class="content">
+                        <img src="/static/images/Fitbit.png">
+                        <div class="textonpic" style="position: absolute;left: 33%;top: 30%;">
+                            steps: {{ last_Fitbit.steps }}
+                            <br>
+                            calories: {{ last_Fitbit.calories }}
+                            <br>
+                            floors: {{ last_Fitbit.floors }}
+                            <br>
+                            distance: {{ last_Fitbit.distance }} mile(s)
+                            <br>
+                            weight: {{ last_Fitbit.weight }} lb
+                            <br>
+                            {{ last_Fitbit.date }}
+                        </div>
+                        <br>
+                        <!--click hypertext 'more Fitbit data' and then jump to Fitbitdata.html-->
+                        <a href="{% url 'Fitbitdata' %}" target="_parent">more Fitbit data></a>
+                        <br>
+                        <!--#click button 'get new Fitbit data' and then jump to getFitbit.html-->
+                        <form action="getFitbit" method="get">
+                            <button name="getFitbit" type="submit" value="Submit">get new Fitbit data</button>
+                        </form>
+                    </div>
+                </td>
+                <td>
+                    <div class="content">
+                        <img src="/static/images/Apple.png">
+                        <div class="textonpic" style="position: absolute;left: 53%;top: 30%;">
+                            steps: {{ last_Apple.steps }}
+                            <br>
+                            distance: {{ last_Apple.distance }} mile(s)
+                            <br>
+                            floors: {{ last_Apple.floors }}
+                            <br>
+                            calories: {{ last_Apple.calories }}
+                            <br>
+                            heart rate: {{ last_Apple.heart_rate }} BPM
+                            <br>
+                            exercise minutes: {{ last_Apple.exercise_minutes }}
+                            <br>
+                            {{ last_Apple.date }}
+                        </div>
+                        <br>
+                        <!--click hypertext 'more Apple data' and then jump to Appledata.html-->
+                        <a href="{% url 'Appledata' %}" target="_parent">more Apple data></a>
+                        <br>
+                        <!--#click button 'get new Apple data' and then jump to getApple.html-->
+                        <form action="getApple" method="get">
+                            <button name="getApple" type="submit" value="Submit">get new Apple data</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <div style="text-align: center;">
+        <form action="{% url 'index' %}" method="get">
         <button name="home" type="submit" value="Submit">home</button>
     </form>
+    </div>
 </body>
 </html>

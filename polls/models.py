@@ -21,9 +21,6 @@ class Symptom(models.Model):
     cough_severity_index=((0,'Never'),(1,'Almost never'),(2,'Sometimes'),(3,'Almost always'),(4,'Always'))
     cough_severity=models.SmallIntegerField(choices=cough_severity_index)
     date=models.DateField()
-    #list date on admin page
-    def __str__(self):
-        return self.date
 
 class MedicineHistory(models.Model):
     medicine_name=models.CharField(max_length=100)
@@ -55,9 +52,6 @@ class Fitbit(models.Model):
     distance=models.FloatField()
     weight=models.IntegerField()
     date=models.DateField()
-    #list date on admin page
-    def __str__(self):
-        return self.date
 
 class Apple(models.Model):
     steps=models.IntegerField()
@@ -67,6 +61,3 @@ class Apple(models.Model):
     heart_rate=models.IntegerField()
     exercise_minutes=models.IntegerField()
     date=models.DateField()
-    #list date on admin page
-    def __str__(self):
-        return self.date
