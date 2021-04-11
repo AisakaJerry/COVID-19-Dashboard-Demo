@@ -5,6 +5,8 @@ from .forms import TopicFormTakeout,TopicFormDoctorVisit,TopicFormSymptom,TopicF
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
+from django.views.generic import View
+from .forms import SelectStateForm
 
 # Create your views here.
 def detail(request, question_id):
@@ -28,6 +30,21 @@ def syncdata(request):
 #get sync data page
 def getsync(request):
     return render(request,'templates/getsync.html')
+
+def getLocalData(request):
+    select_form = SelectStateForm()
+    return render(request, 'templates/getLocalData.html', {
+        'select_form': select_form,
+    })
+
+def displayLocalData(request):
+    select_form = SelectStateForm(request.POST)
+    if select_form.is_valid():
+        get_value = request.POST.get('sel_value', "")
+        # other logic
+        context = {'get_value': get_value}
+        return render(request, 'templates/displaylocaldata.html',context=context)
+
 
 #takeout data page
 def takeoutdata(request):

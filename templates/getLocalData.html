@@ -7,14 +7,15 @@
 <body>
 <h1>Choose your state</h1>
 <br>
-<form method="post" action="">
-    <select name='sel_value'>
-        {% for key, value in select_form.SELVALUE %}
-            <option value="{{ value }}">{{ key }}</option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Test"/>
-    {% csrf_token %}
-</form>
+    <form action="{% url 'getLocalData' %}" method="post">
+        <select name='sel_value'>
+            {% for key, value in select_form.SELVALUE %}
+                <option value="{{ value }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Test"/>
+        {% csrf_token %}
+        {{ form.as_p }}
+    </form>
 </body>
 </html>

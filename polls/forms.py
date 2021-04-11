@@ -42,6 +42,10 @@ class TopicFormTrip(forms.ModelForm):
         model=Trip
         fields=['location','departure_date','lasting_day']
 
-class SelectStateForm(forms.Form):
+class SelectStateForm(forms.ModelForm):
     SELVALUE = State.SELVALUE
     sel_value = forms.CharField(max_length=10, widget=forms.widgets.Select(choices=SELVALUE))
+
+    class Meta:
+        model = State
+        fields = ['select_value']
