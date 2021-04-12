@@ -9,6 +9,7 @@ import random
 from django.views.generic import View
 from .forms import SelectStateForm
 import requests
+import json
 
 # Create your views here.
 def detail(request, question_id):
@@ -254,15 +255,17 @@ def displayLocalData(request):
     if select_form.is_valid():
         get_value = request.POST.get('sel_value', "")
         # other logic
-        r = requests.get('https://api.covidactnow.org/v2/state/VA.json?apiKey=9fbed953db9f469badede64ddbb3e829', params=requests.get)
-        jsonFile = r.json()
-        population = jsonFile.population
-        cases = jsonFile.acturals.cases
-        death = jsonFile.acturals.deaths
-        content = {'population':population, 'cases':cases, 'death':death}
-        form = localDataForm(content)
-        form.save()
-        context = {'form':form}
-        # context = {'get_value': get_value}
-        # return render(request, 'templates/displaylocaldata.html',context=context)
-        return render(request, 'templates/displayLocalData.html', context=context)
+
+    r = requests.get('https://api.covidactnow.org/v2/state/VA.json?apiKey=9fbed953db9f469badede64ddbb3e829', params=requests.get)
+    jsonFile = r.json()
+    # print(jsonFile)
+    population = jsonFile['population']
+    cases = jsonFile['actuals']['cases']
+    death = jsonFile['actuals']['deaths']
+    content = {'population':population, 'cases':cases, 'death':death}
+    # form = localDataForm(content)
+    # form.save()
+    # context = {'form':form}
+    # context = {'get_value': get_value}
+    # return render(request, 'templates/displaylocaldata.html',context=context)
+    return render(request, 'templates/displayLocalData.html', context=content)
