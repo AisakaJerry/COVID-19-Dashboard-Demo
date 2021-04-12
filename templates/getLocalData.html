@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Local Covid Data</title>
+</head>
+<body>
+<h1>Choose your state</h1>
+<br>
+    <form action="{% url 'getLocalData' %}" method="post">
+        <select name='sel_value'>
+            {% for key, value in select_form.SELVALUE %}
+                <option value="{{ value }}">{{ key }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Test"/>
+        {% csrf_token %}
+        {{ form.as_p }}
+    </form>
+    <button>
+        
+    </button>
+</body>
+</html>

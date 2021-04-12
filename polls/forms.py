@@ -1,5 +1,5 @@
 from django import forms
-from .models import Takeout,DoctorVisit,Symptom,MedicineHistory,SurroundingSituation,Trip,Fitbit,Apple
+from .models import Takeout,DoctorVisit,Symptom,MedicineHistory,SurroundingSituation,Trip,Fitbit,Apple, State, localData
 
 #it tells django which model to create the form from
 class TopicFormTakeout(forms.ModelForm):
@@ -47,3 +47,16 @@ class TopicFormApple(forms.ModelForm):
     class Meta:
         model=Apple
         fields=['steps','distance','floors','calories','heart_rate','exercise_minutes','date']
+
+class SelectStateForm(forms.ModelForm):
+    SELVALUE = State.SELVALUE
+    sel_value = forms.CharField(max_length=10, widget=forms.widgets.Select(choices=SELVALUE))
+
+    class Meta:
+        model = State
+        fields = ['select_value']
+
+class localDataForm(forms.ModelForm):
+    class Meta:
+        model = localData
+        fields=['population', 'cases', 'death']

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.base import Model
 
 # Create your models here.
 class Takeout(models.Model):
@@ -70,3 +71,70 @@ class Apple(models.Model):
     #list date on admin page
     def __str__(self):
         return self.date
+
+class State(models.Model):
+    SELVALUE = (
+        ('Alabama', 'AL'),
+        ('Alaska', 'AK'),
+        ('Arizona', 'AZ'),
+        ('Arkansas', 'AR'),
+        ('California', 'CA'),
+        ('Colorado', 'CO'),
+        ('Connecticut', 'CT'),
+        ('Delaware', 'DE'),
+        ('District of Columbia', 'DC'),
+        ('Florida', 'FL'),
+        ('Georgia', 'GA'),
+        ('Hawaii', 'HI'),
+        ('Idaho', 'ID'),
+        ('Illinios', 'IL'),
+        ('Indiana', 'IN'),
+        ('Iowa', 'IA'),
+        ('Kansas', 'KS'),
+        ('Kentucky', 'KY'),
+        ('Louisiana', 'LA'),
+        ('Maine', 'ME'),
+        ('Maryland', 'MD'),
+        ('Massachusetts', 'MA'),
+        ('Michigan', 'MI'),
+        ('Minnesota', 'MN'),
+        ('Mississippi', 'MS'),
+        ('Missouri', 'MO'),
+        ('Montana', 'MT'),
+        ('Nebraska', 'NE'),
+        ('Nevada', 'NV'),
+        ('New Hampshire', 'NH'),
+        ('New Jersey', 'NJ'),
+        ('New Mexico', 'NM'),
+        ('New York', 'NY'),
+        ('North Carolina', 'NC'),
+        ('North Dakota', 'ND'),
+        ('Ohio', 'OH'),
+        ('Oklahoma', 'OK'),
+        ('Oregon', 'OR'),
+        ('Pennsylvania', 'PA'),
+        ('Rhode Island', 'RI'),
+        ('South Carolina', 'SC'),
+        ('South Dakota', 'SD'),
+        ('Tennessee', 'TN'),
+        ('Texas', 'TX'),
+        ('Utah', 'UT'),
+        ('Vermont', 'VT'),
+        ('Virginia', 'VA'),
+        ('Washington', 'WA'),
+        ('West Virginia', 'WV'),
+        ('Wisconsin', 'WI'),
+        ('Wyoming', 'WY'),
+    )
+    select_value = models.CharField(max_length=30, choices=SELVALUE)
+    # list the selected state on admin page
+    def __str__(self):
+        return self.select_value
+
+class localData(models.Model):
+    population = models.IntegerField()
+    cases = models.IntegerField()
+    death = models.IntegerField()
+
+    def __str__(self):
+        return self.cases

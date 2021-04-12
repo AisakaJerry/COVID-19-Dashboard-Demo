@@ -35,4 +35,6 @@ urlpatterns = [
     path('syncdata/getFitbit/',views.getFitbit,name='getFitbit'),
     path('Appledata/', views.Appledata, name='Appledata'),
     path('syncdata/getApple/', views.getApple, name='getApple'),
+    path('getLocalData/', views.getLocalData, name='getLocalData'),
+    path('displayLocalData/',views.displayLocalData, name='displayLocalData'),
 ]

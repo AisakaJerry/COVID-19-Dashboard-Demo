@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Takeout,DoctorVisit,Symptom,MedicineHistory,SurroundingSituation,Trip,Fitbit,Apple
-from .forms import TopicFormTakeout,TopicFormDoctorVisit,TopicFormSymptom,TopicFormMedicineHistory,TopicFormSurroundingSituation,TopicFormTrip,TopicFormFitbit,TopicFormApple
+from .forms import TopicFormTakeout,TopicFormDoctorVisit,TopicFormSymptom,TopicFormMedicineHistory,TopicFormSurroundingSituation,TopicFormTrip,TopicFormFitbit,TopicFormApple, localDataForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 import random
+from django.views.generic import View
+from .forms import SelectStateForm
+import requests
 
 # Create your views here.
 def detail(request, question_id):
@@ -220,3 +223,27 @@ def getApple(request):
     form.save()
     context={'form':form}
     return render(request,'templates/getApple.html',context=context)
+
+def getLocalData(request):
+    select_form = SelectStateForm()
+    return render(request, 'templates/getLocalData.html', {
+        'select_form': select_form,
+    })
+
+def displayLocalData(request):
+    select_form = SelectStateForm(request.POST)
+    if select_form.is_valid():
+        get_value = request.POST.get('sel_value', "")
+        # other logic
+        r = requests.get('https://api.covidactnow.org/v2/state/VA.json?apiKey=9fbed953db9f469badede64ddbb3e829', params=requests.get)
+        jsonFile = r.json()
+        population = jsonFile.population
+        cases = jsonFile.acturals.cases
+        death = jsonFile.acturals.deaths
+        content = {'population':population, 'cases':cases, 'death':death}
+        form = localDataForm(content)
+        form.save()
+        context = {'form':form}
+        # context = {'get_value': get_value}
+        # return render(request, 'templates/displaylocaldata.html',context=context)
+        return render(request, 'templates/displayLocalData.html', context=context)
