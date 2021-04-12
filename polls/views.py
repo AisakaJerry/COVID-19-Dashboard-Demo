@@ -23,7 +23,21 @@ def vote(request, question_id):
 
 #home page
 def index(request):
-    return render(request,'templates/index.html')
+    #show the last takeout data
+    numbers_takeout=Takeout.objects.count()
+    last_takeout=Takeout.objects.all()[numbers_takeout-1]
+    numbers_doctorvisit=DoctorVisit.objects.count()
+    last_doctorvisit=DoctorVisit.objects.all()[numbers_doctorvisit-1]
+    numbers_symptom=Symptom.objects.count()
+    last_symptom=Symptom.objects.all()[numbers_symptom-1]
+    numbers_medicinehistory=MedicineHistory.objects.count()
+    last_medicinehistory=MedicineHistory.objects.all()[numbers_medicinehistory-1]
+    numbers_surroundingituation=SurroundingSituation.objects.count()
+    last_surroundingsituation=SurroundingSituation.objects.all()[numbers_surroundingituation-1]
+    numbers_trip=Trip.objects.count()
+    last_trip=Trip.objects.all()[numbers_trip-1]
+    context={'last_takeout':last_takeout,'last_doctorvisit':last_doctorvisit,'last_symptom':last_symptom,'last_medicinehistory':last_medicinehistory,'last_surroundingsituation':last_surroundingsituation,'last_trip':last_trip}
+    return render(request,'templates/index.html',context=context)
 
 #takeout data page
 def takeoutdata(request):
@@ -177,7 +191,12 @@ def likelihood(request):
 
 #sync data page
 def syncdata(request):
-    return render(request,'templates/syncdata.html')
+    numbers_Fitbit=Fitbit.objects.count()
+    last_Fitbit=Fitbit.objects.all()[numbers_Fitbit-1]
+    numbers_Apple=Apple.objects.count()
+    last_Apple=Apple.objects.all()[numbers_Apple-1]
+    context={'last_Fitbit':last_Fitbit,'last_Apple':last_Apple}
+    return render(request,'templates/syncdata.html',context=context)
 
 #Fitbit data page
 def Fitbitdata(request):

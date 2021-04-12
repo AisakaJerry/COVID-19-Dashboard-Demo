@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>home</title>
+    <style>
+        #multicentre{
+		    text-align:center
+		}
+        table{margin: auto}
+    </style>
+    <style>
+        .textonpic{
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <!--leave four lines at the top of the page-->
@@ -15,72 +26,174 @@
     <br>
     <br>
     <br>
-    <div style="text-align:center">
-        <!--#click button 'sync data' and then jump to syncdata.html-->
-        <form action="syncdata" method="get">
-            <button name="syncdata" type="submit" value="Submit">sync data</button>
-        </form>
-        <br>
-        <!--click hypertext 'more takeout data' and then jump to takeout.html-->
-        <a href="{% url 'takeoutdata' %}" target="_parent">more takeout data></a>
-        <br>
-        <!--#click button 'add new takeout data' and then jump to addtakeout.html-->
-        <form action="addtakeout" method="get">
-            <button name="addtakeout" type="submit" value="Submit">add takeout data</button>
-        </form>
-        <br>
-        <!--click hypertext 'more doctor visit data' and then jump to doctorvisitdata.html-->
-        <a href="{% url 'doctorvisitdata' %}" target="_parent">more doctor visit data></a>
-        <br>
-        <!--#click button 'add new doctor visit data' and then jump to adddoctorvisit.html-->
-        <form action="adddoctorvisit" method="get">
-            <button name="adddoctorvisit" type="submit" value="Submit">add doctor visit data</button>
-        </form>
-        <br>
-        <!--click hypertext 'more symptom data' and then jump to symptomdata.html-->
-        <a href="{% url 'symptomdata' %}" target="_parent">more symptom data></a>
-        <br>
-        <!--#click button 'add new symptom data' and then jump to addsymptom.html-->
-        <form action="addsymptom" method="get">
-            <button name="addsymptom" type="submit" value="Submit">add symptom data</button>
-        </form>
-        <br>
-        <!--click hypertext 'more medicine history data' and then jump to medicinehistorydata.html-->
-        <a href="{% url 'medicinehistorydata' %}" target="_parent">more medicine history data></a>
-        <br>
-        <!--#click button 'add new medicine history data' and then jump to addmedicinehistory.html-->
-        <form action="addmedicinehistory" method="get">
-            <button name="addmedicinehistory" type="submit" value="Submit">add medicine history data</button>
-        </form>
-        <br>
-        <!--click hypertext 'more surrounding situation data' and then jump to surroundingsituationdata.html-->
-        <a href="{% url 'surroundingsituationdata' %}" target="_parent">more surrounding situation data></a>
-        <br>
-        <!--#click button 'add new surrounding situation data' and then jump to addsurroundingsituation.html-->
-        <form action="addsurroundingsituation" method="get">
-            <button name="addsurroundingsituation" type="submit" value="Submit">add surrounding situation data</button>
-        </form>
-        <br>
-        <!--click hypertext 'more trip data' and then jump to tripdata.html-->
-        <a href="{% url 'tripdata' %}" target="_parent">more trip data></a>
-        <br>
-        <!--#click button 'add new trip data' and then jump to addtrip.html-->
-        <form action="addtrip" method="get">
-            <button name="addtrip" type="submit" value="Submit">add trip data</button>
-        </form>
-        <br>
-        <form action="getLocalData" method="get">
-            <button name="getLocalData" type="submit" value="Submit">get Local Data</button>
-        </form>
-        <br>
-        <form action="displayLocalData" method="get">
-            <button name="displayLocalData" type="submit" value="Submit">Show Local Data</button>
-        </form>
-        <br>
-        <!--#click button 'check likelihood' and then jump to likelihood.html-->
-        <form action="likelihood" method="get">
-            <button name="likelihood" type="submit" value="Submit">check likelihood</button>
-        </form>
+    <div id="multicentre" class='header'>
+        <table>
+            <tr>
+                <td>
+                    <div class='content'>
+                        <img src="/static/images/takeout.png">
+                        <div class="textonpic" style="position: absolute;left: 23%;top: 60%;">
+                            {{ last_takeout.restaurant_name }}
+                            <br>
+                            <br>
+                            {{ last_takeout.date }}
+                        </div>
+                        <br>
+                        <!--click hypertext 'more takeout data' and then jump to takeout.html-->
+                        <a href="{% url 'takeoutdata' %}" target="_parent">more takeout data></a>
+                        <br>
+                        <!--#click button 'add new takeout data' and then jump to addtakeout.html-->
+                        <form action="addtakeout" method="get">
+                            <button name="addtakeout" type="submit" value="Submit">add takeout data</button>
+                        </form>
+                    </div>
+                </td>
+                <td>
+                    <div class='content'>
+                        <img src="/static/images/doctor%20visit.png">
+                        <div class="textonpic" style="position: absolute;left: 43%;top: 60%;">
+                            {{ last_doctorvisit.doctor_name }}
+                            <br>
+                            <br>
+                            {{ last_doctorvisit.date }}
+                        </div>
+                        <br>
+                        <!--click hypertext 'more doctor visit data' and then jump to doctorvisitdata.html-->
+                        <a href="{% url 'doctorvisitdata' %}" target="_parent">more doctor visit data></a>
+                        <br>
+                        <!--#click button 'add new doctor visit data' and then jump to adddoctorvisit.html-->
+                        <form action="adddoctorvisit" method="get">
+                            <button name="adddoctorvisit" type="submit" value="Submit">add doctor visit data</button>
+                        </form>
+                    </div>
+                </td>
+                <td>
+                    <div class='content'>
+                        <img src="/static/images/symptom.png">
+                        <div class="textonpic" style="position: absolute;left: 63%;top: 60%;">
+                            body temperature: {{ last_symptom.body_temperature }} <span>&#8451;</span>
+                            <br>
+                            <br>
+                            cough severity:
+                            {% if last_symptom.cough_severity == 0 %}
+                                Never
+                                {% elif last_symptom.cough_severity == 1 %}
+                                    Almost never
+                                {% elif last_symptom.cough_severity == 2 %}
+                                    Sometimes
+                                {% elif last_symptom.cough_severity == 3 %}
+                                    Almost always
+                                {% else %}
+                                    Always
+                            {% endif %}
+                            <br>
+                            <br>
+                            {{ last_symptom.date }}
+                        </div>
+                        <br>
+                        <!--click hypertext 'more symptom data' and then jump to symptomdata.html-->
+                        <a href="{% url 'symptomdata' %}" target="_parent">more symptom data></a>
+                        <br>
+                        <!--#click button 'add new symptom data' and then jump to addsymptom.html-->
+                        <form action="addsymptom" method="get">
+                        <button name="addsymptom" type="submit" value="Submit">add symptom data</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="content">
+                        <img src="/static/images/medicine%20history.png">
+                        <div class="textonpic" style="position: absolute;left: 23%;top: 106%;">
+                            {{ last_medicinehistory.medicine_name }}
+                            <br>
+                            <br>
+                            {{ last_medicinehistory.start_date }}
+                            <br>
+                            <br>
+                            lasting day: {{ last_medicinehistory.lasting_day }}
+                        </div>
+                        <br>
+                        <!--click hypertext 'more medicine history data' and then jump to medicinehistorydata.html-->
+                        <a href="{% url 'medicinehistorydata' %}" target="_parent">more medicine history data></a>
+                        <br>
+                        <!--#click button 'add new medicine history data' and then jump to addmedicinehistory.html-->
+                        <form action="addmedicinehistory" method="get">
+                            <button name="addmedicinehistory" type="submit" value="Submit">add medicine history data</button>
+                        </form>
+                    </div>
+                </td>
+                <td>
+                    <div class="content">
+                        <img src="/static/images/surrounding%20situation.png">
+                        <div class="textonpic" style="position: absolute;left: 43%;top: 106%;">
+                            {{ last_surroundingsituation.positive_people_name }}
+                            <br>
+                            <br>
+                            {{ last_surroundingsituation.last_meet_date }}
+                        </div>
+                        <br>
+                        <!--click hypertext 'more surrounding situation data' and then jump to surroundingsituationdata.html-->
+                        <a href="{% url 'surroundingsituationdata' %}" target="_parent">more surrounding situation data></a>
+                        <br>
+                        <!--#click button 'add new surrounding situation data' and then jump to addsurroundingsituation.html-->
+                        <form action="addsurroundingsituation" method="get">
+                            <button name="addsurroundingsituation" type="submit" value="Submit">add surrounding situation data</button>
+                        </form>
+                    </div>
+                </td>
+                <td>
+                    <div class="content">
+                        <img src="/static/images/trip.png">
+                        <div class="textonpic" style="position: absolute;left: 63%;top: 106%;">
+                            {{ last_trip.location }}
+                            <br>
+                            <br>
+                            {{ last_trip.departure_date }}
+                            <br>
+                            <br>
+                            lastin day(s): {{ last_trip.lasting_day }}
+                        </div>
+                        <br>
+                        <!--click hypertext 'more trip data' and then jump to tripdata.html-->
+                        <a href="{% url 'tripdata' %}" target="_parent">more trip data></a>
+                        <br>
+                        <!--#click button 'add new trip data' and then jump to addtrip.html-->
+                        <form action="addtrip" method="get">
+                            <button name="addtrip" type="submit" value="Submit">add trip data</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="content">
+                        <img src="/static/images/sync.png">
+                        <br>
+                        <!--#click button 'sync data' and then jump to syncdata.html-->
+                        <form action="syncdata" method="get">
+                            <button name="syncdata" type="submit" value="Submit">sync data</button>
+                        </form>
+                    </div>
+                </td>
+                <td>
+                    <div class="content">
+                        <img src="/static/images/local%20data.png">
+                    </div>
+                </td>
+                <td>
+                    <div class="content">
+                        <img src="/static/images/likelihood.png">
+                        <br>
+                        <!--#click button 'check likelihood' and then jump to likelihood.html-->
+                        <form action="likelihood" method="get">
+                            <button name="likelihood" type="submit" value="Submit">check likelihood</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>
