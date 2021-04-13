@@ -21,6 +21,11 @@
         {% endif %}
         <!--hyptertext for adding new doctor visit data-->
         <a href="{% url 'adddoctorvisit' %}">add doctor visit data</a>
+        <br>
+        <br>
+        <form action="{% url 'index' %}" method="get">
+            <button name="home" type="submit" value="Submit">home</button>
+        </form>
     {% endblock content %}
 </body>
 </html>

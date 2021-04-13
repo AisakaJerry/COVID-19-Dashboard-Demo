@@ -325,7 +325,16 @@ def displayLocalData(request):
     population = jsonFile['population']
     cases = jsonFile['actuals']['cases']
     death = jsonFile['actuals']['deaths']
-    content = {'state':state_dict[state], 'population':population, 'cases':cases, 'death':death}
+    vacInit = round(jsonFile['metrics']['vaccinationsInitiatedRatio'] * 100, 2)
+    vacComp = round(jsonFile['metrics']['vaccinationsCompletedRatio'] * 100, 2)
+    content = {
+        'state':state_dict[state],
+        'population':population, 
+        'cases':cases, 
+        'death':death,
+        'vacInit':vacInit,
+        'vacComp':vacComp
+    }
     # form = localDataForm(content)
     # form.save()
     # context = {'form':form}
