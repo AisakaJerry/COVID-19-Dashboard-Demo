@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Takeout,DoctorVisit,Symptom,MedicineHistory,SurroundingSituation,Trip,Fitbit,Apple
+from .models import State, Takeout,DoctorVisit,Symptom,MedicineHistory,SurroundingSituation,Trip,Fitbit,Apple
 from .forms import TopicFormTakeout,TopicFormDoctorVisit,TopicFormSymptom,TopicFormMedicineHistory,TopicFormSurroundingSituation,TopicFormTrip,TopicFormFitbit,TopicFormApple, localDataForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -244,25 +244,88 @@ def getApple(request):
     context={'form':form}
     return render(request,'templates/getApple.html',context=context)
 
-def getLocalData(request):
-    select_form = SelectStateForm()
-    return render(request, 'templates/getLocalData.html', {
-        'select_form': select_form,
-    })
+def getLocalData(request):    #if no data is added, build an empty form
+    #if no data is added, build an empty form
+    if request.method != 'POST':
+        form=SelectStateForm()
+    else:
+        form=SelectStateForm(request.POST)#add new data
+        if form.is_valid():
+            new_state = form.save(commit=False)
+            new_state.owner=request.user
+            new_state.save()
+            return HttpResponseRedirect(reverse('getLocalData'))
+    context={'form':form}
+
+    return render(request, 'templates/getLocalData.html', context=context)
 
 def displayLocalData(request):
+    state_dict = dict((
+        ('AL','Alabama'),
+        ('AK','Alaska'),
+        ('AZ','Arizona'),
+        ('AR','Arkansas'),
+        ('CA','California'),
+        ('CO','Colorado'),
+        ('CT','Connecticut'),
+        ('DE','Delaware'),
+        ('DC','District of Columbia'),
+        ('FL','Florida'),
+        ('GA','Georgia'),
+        ('HI','Hawaii'),
+        ('ID','Idaho'),
+        ('IL','Illinios'),
+        ('IN','Indiana'),
+        ('IA','Iowa'),
+        ('KS','Kansas'),
+        ('KY','Kentucky'),
+        ('LA','Louisiana'),
+        ('ME','Maine'),
+        ('MD','Maryland'),
+        ('MA','Massachusetts'),
+        ('MI','Michigan'),
+        ('MN','Minnesota'),
+        ('MS','Mississippi'),
+        ('MO','Missouri'),
+        ('MT','Montana'),
+        ('NE','Nebraska'),
+        ('NV','Nevada'),
+        ('NH','New Hampshire'),
+        ('NJ','New Jersey'),
+        ('NM','New Mexico'),
+        ('NY','New York'),
+        ('NC','North Carolina'),
+        ('ND','North Dakota'),
+        ('OH','Ohio'),
+        ('OK','Oklahoma'),
+        ('OR','Oregon'),
+        ('PA','Pennsylvania'),
+        ('RI','Rhode Island'),
+        ('SC','South Carolina'),
+        ('SD','South Dakota'),
+        ('TN','Tennessee'),
+        ('TX','Texas'),
+        ('UT','Utah'),
+        ('VT','Vermont'),
+        ('VA','Virginia'),
+        ('WA','Washington'),
+        ('WV','West Virginia'),
+        ('WI','Wisconsin'),
+        ('WY','Wyoming'),
+    ))
     select_form = SelectStateForm(request.POST)
-    if select_form.is_valid():
-        get_value = request.POST.get('sel_value', "")
-        # other logic
-
-    r = requests.get('https://api.covidactnow.org/v2/state/VA.json?apiKey=9fbed953db9f469badede64ddbb3e829', params=requests.get)
+    if select_form:
+        state = State.objects.order_by('id')[0].select_state
+    else:
+        state = 'DC'
+    url = 'https://api.covidactnow.org/v2/state/' + state + '.json?apiKey=9fbed953db9f469badede64ddbb3e829'
+    r = requests.get(url, params=requests.get)
     jsonFile = r.json()
     # print(jsonFile)
     population = jsonFile['population']
     cases = jsonFile['actuals']['cases']
     death = jsonFile['actuals']['deaths']
-    content = {'population':population, 'cases':cases, 'death':death}
+    content = {'state':state_dict[state], 'population':population, 'cases':cases, 'death':death}
     # form = localDataForm(content)
     # form.save()
     # context = {'form':form}
