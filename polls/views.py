@@ -315,7 +315,7 @@ def displayLocalData(request):
     ))
     select_form = SelectStateForm(request.POST)
     if select_form:
-        state = State.objects.order_by('id')[0].select_state
+        state = State.objects.order_by('-id')[0].select_state
     else:
         state = 'DC'
     url = 'https://api.covidactnow.org/v2/state/' + state + '.json?apiKey=9fbed953db9f469badede64ddbb3e829'

@@ -12,6 +12,10 @@
             {{ form.as_p }}
             <button name="submit">ok</button>
         </form>
+        <br>
+        <form action="{% url 'index' %}" method="get">
+            <button name="home" type="submit" value="Submit">home</button>
+        </form>
     {% endblock content %}
 </body>
 </html>
