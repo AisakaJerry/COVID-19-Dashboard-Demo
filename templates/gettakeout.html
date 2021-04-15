@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>gettakeout</title>
+</head>
+<body>
+    {% block content %}
+        <h4>get takeout data from Uber Eats</h4>
+        <p>restaurant name: {{ form.restaurant_name }}</p>
+        <p>dishes: {{ form.dishes }} </p>
+        <p>date: {{ form.date }}</p>
+    {% endblock content %}
+    <br>
+    <br>
+    <form action="{% url 'takeoutdata' %}" method="get">
+        <button name="OK" type="submit" value="Submit">OK</button>
+    </form>
+</body>
+</html>

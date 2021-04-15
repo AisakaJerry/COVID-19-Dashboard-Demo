@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 import random
+from random import choice
 from django.views.generic import View
 from .forms import SelectStateForm
 import requests
@@ -46,7 +47,7 @@ def takeoutdata(request):
     context={'takeout_list':takeout_list}
     return render(request,'templates/takeoutdata.html',context=context)
 
-#add takeout data page
+#add takeout data by manually input
 def addtakeout(request):
     #if no data is added, build an empty form
     if request.method !='POST':
@@ -61,13 +62,28 @@ def addtakeout(request):
     context={'form':form}
     return render(request,'templates/addtakeout.html',context=context)
 
+#get takeout data from online services
+def gettakeout(request):
+    #use random number to initialise the form
+    restaurant_name_choices=['Starbucks','Wawa','Popeyes']
+    restaurant_name=choice(restaurant_name_choices)
+    dishes_choices=['Iced Caramel Macchiato','Iced White Chocolate Mocha','Custom Burger','Fries','Spicy Chicken Sandwich Combo','Classic Chicken Sandwich Combo']
+    dishes=choice(dishes_choices)
+    date=datetime.date.today()
+    #build a Takeout form
+    content={'restaurant_name':restaurant_name,'dishes':dishes,'date':date}
+    form=TopicFormTakeout(content)
+    form.save()
+    context={'form':form}
+    return render(request,'templates/gettakeout.html',context=context)
+
 #doctor visit data page
 def doctorvisitdata(request):
     doctorvisit_list=DoctorVisit.objects.all()
     context={'doctorvisit_list':doctorvisit_list}
     return render(request,'templates/doctorvisitdata.html',context=context)
 
-#add doctor visit data page
+#add doctor visit data by manually input
 def adddoctorvisit(request):
     #if no data is added, build an empty form
     if request.method != 'POST':
@@ -81,6 +97,19 @@ def adddoctorvisit(request):
             return HttpResponseRedirect(reverse('doctorvisitdata'))
     context={'form':form}
     return render(request,'templates/adddoctorvisit.html',context=context)
+
+#add doctor visit data from online services
+def getdoctorvisit(request):
+    #use random number to initialise the form
+    doctor_name_choices=['Priya Murthy','Matthew Burke','Juan Hernandez']
+    doctor_name=choice(doctor_name_choices)
+    date=datetime.date.today()
+    #build a Takeout form
+    content={'doctor_name':doctor_name,'date':date}
+    form=TopicFormDoctorVisit(content)
+    form.save()
+    context={'form':form}
+    return render(request,'templates/getdoctorvisit.html',context=context)
 
 #symptom data page
 def symptomdata(request):
