@@ -25,19 +25,25 @@
             <tr>
                 <td>
                     <div class="content">
-                        <img src="/static/images/Fitbit.png">
-                        <div class="textonpic" style="position: absolute;left: 33%;top: 30%;">
-                            steps: {{ last_Fitbit.steps }}
+                        <div class="textonpic" style="background:url('/static/images/Fitbit.png') no-repeat;width:290px;height:290px;">
                             <br>
-                            calories: {{ last_Fitbit.calories }}
                             <br>
-                            floors: {{ last_Fitbit.floors }}
                             <br>
-                            distance: {{ last_Fitbit.distance }} mile(s)
                             <br>
-                            weight: {{ last_Fitbit.weight }} lb
                             <br>
-                            {{ last_Fitbit.date }}
+                            <br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;steps: {{ last_Fitbit.steps }}
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calories: {{ last_Fitbit.calories }}
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;floors: {{ last_Fitbit.floors }}
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;distance: {{ last_Fitbit.distance }} mile(s)
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weight: {{ last_Fitbit.weight }} lb
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ last_Fitbit.date }}
                         </div>
                         <br>
                         <!--click hypertext 'more Fitbit data' and then jump to Fitbitdata.html-->
@@ -51,21 +57,26 @@
                 </td>
                 <td>
                     <div class="content">
-                        <img src="/static/images/Apple.png">
-                        <div class="textonpic" style="position: absolute;left: 53%;top: 30%;">
-                            steps: {{ last_Apple.steps }}
+                        <div class="textonpic" style="background:url('/static/images/Apple.png') no-repeat;width:290px;height:290px;">
                             <br>
-                            distance: {{ last_Apple.distance }} mile(s)
                             <br>
-                            floors: {{ last_Apple.floors }}
                             <br>
-                            calories: {{ last_Apple.calories }}
                             <br>
-                            heart rate: {{ last_Apple.heart_rate }} BPM
                             <br>
-                            exercise minutes: {{ last_Apple.exercise_minutes }}
                             <br>
-                            {{ last_Apple.date }}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;steps: {{ last_Apple.steps }}
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;distance: {{ last_Apple.distance }} mile(s)
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;floors: {{ last_Apple.floors }}
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calories: {{ last_Apple.calories }}
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heart rate: {{ last_Apple.heart_rate }} BPM
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exercise minutes: {{ last_Apple.exercise_minutes }}
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ last_Apple.date }}
                         </div>
                         <br>
                         <!--click hypertext 'more Apple data' and then jump to Appledata.html-->
@@ -80,6 +91,7 @@
             </tr>
         </table>
     </div>
+    <br>
     <br>
     <div style="text-align: center;">
         <form action="{% url 'index' %}" method="get">
