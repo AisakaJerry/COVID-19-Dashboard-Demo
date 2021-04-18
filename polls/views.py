@@ -1,3 +1,4 @@
+from os import name
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import State, Takeout,DoctorVisit,Symptom,MedicineHistory,SurroundingSituation,Trip,Fitbit,Apple
@@ -433,7 +434,7 @@ def displayLocalData(request):
     jsonFile = r.json()
     newCases = [key['newCases'] for key in jsonFile['actualsTimeseries'][10:-2]]
     newDate = [key['date'] for key in jsonFile['actualsTimeseries'][10:-2]]
-    plotData = Scatter(x=newDate, y=newCases, mode='lines', opacity=0.8, marker_color='red')
+    plotData = Scatter(x=newDate, y=newCases, mode='lines', opacity=0.8, name='New Case Daily', marker_color='red')
     plot_div = plot([plotData],output_type='div')
 
     content = {

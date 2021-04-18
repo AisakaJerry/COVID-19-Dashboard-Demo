@@ -22,6 +22,9 @@
         {{ plot_div | safe }}
         </div>
     </div>
+    <br>
+    <br>
+    <p style="color:gray">last update: {{lastUpdate}}</p>
     <form action="{% url 'index' %}" method="get">
         <button name="home" type="submit" value="Submit">home</button>
     </form>
