@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Choose your state</title>
+    <style> 
+        body{text-align:center} 
+    </style> 
 </head>
 <body>
     {% block content %}
@@ -10,7 +13,18 @@
         <form action="{% url 'getLocalData' %}" method='post'>
             {% csrf_token %}
             {{ form.as_p }}
-            <button name="submit">ok</button>
+            <button name="submit">submit</button>
+        </form>
+        <br>
+        <h4>or find the state from your IP location</h4>
+        <form action="{% url 'getLocalDataByIP' %}" method="POST">
+            <button name="Find my state" type="submit" value="Submit">Find my state</button>
+            {% csrf_token %}
+        </form>
+        <br>
+        <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color=#BDBDBD SIZE=3>
+        <form action="{% url 'displayLocalData' %}" method="GET">
+            <button name='displayLocalData' type="submit" value="Submit">display local data</button>
         </form>
         <br>
         <form action="{% url 'index' %}" method="get">

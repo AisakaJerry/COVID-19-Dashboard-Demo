@@ -292,12 +292,68 @@ def getLocalData(request):    #if no data is added, build an empty form
     return render(request, 'templates/getLocalData.html', context=context)
 
 def getLocalDatabyIP(request):
+    state_dict = dict((
+        ('AL','Alabama'),
+        ('AK','Alaska'),
+        ('AZ','Arizona'),
+        ('AR','Arkansas'),
+        ('CA','California'),
+        ('CO','Colorado'),
+        ('CT','Connecticut'),
+        ('DE','Delaware'),
+        ('DC','District of Columbia'),
+        ('FL','Florida'),
+        ('GA','Georgia'),
+        ('HI','Hawaii'),
+        ('ID','Idaho'),
+        ('IL','Illinios'),
+        ('IN','Indiana'),
+        ('IA','Iowa'),
+        ('KS','Kansas'),
+        ('KY','Kentucky'),
+        ('LA','Louisiana'),
+        ('ME','Maine'),
+        ('MD','Maryland'),
+        ('MA','Massachusetts'),
+        ('MI','Michigan'),
+        ('MN','Minnesota'),
+        ('MS','Mississippi'),
+        ('MO','Missouri'),
+        ('MT','Montana'),
+        ('NE','Nebraska'),
+        ('NV','Nevada'),
+        ('NH','New Hampshire'),
+        ('NJ','New Jersey'),
+        ('NM','New Mexico'),
+        ('NY','New York'),
+        ('NC','North Carolina'),
+        ('ND','North Dakota'),
+        ('OH','Ohio'),
+        ('OK','Oklahoma'),
+        ('OR','Oregon'),
+        ('PA','Pennsylvania'),
+        ('RI','Rhode Island'),
+        ('SC','South Carolina'),
+        ('SD','South Dakota'),
+        ('TN','Tennessee'),
+        ('TX','Texas'),
+        ('UT','Utah'),
+        ('VT','Vermont'),
+        ('VA','Virginia'),
+        ('WA','Washington'),
+        ('WV','West Virginia'),
+        ('WI','Wisconsin'),
+        ('WY','Wyoming'),
+    ))
     ip_address = get('https://api.ipify.org').text
-    print(ip_address)
+    # print(ip_address)
     with geoip2.webservice.Client(535906, '8illxg021TVu5EX1', host='geolite.info') as client:
         response = client.city(ip_address)
-        print(response.subdivisions.most_specific.name)
-    context = {}
+        state = response.subdivisions.most_specific.name
+    key = next(key for key, value in state_dict.items() if value == state)
+    form = SelectStateForm({'select_state': key})
+    form.save()
+    context = {'select_state': state}
     return render(request, 'templates/getLocalDataByIP.html', context=context)
 
 def displayLocalData(request):

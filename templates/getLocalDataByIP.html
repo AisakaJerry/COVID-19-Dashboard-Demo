@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>get Local Data By IP</title>
+    <style> 
+        body{text-align:center} 
+    </style> 
+</head>
+<body>
+    <h1>Your local state is:</h1>
+    <h2>{{select_state}}</h2>
+    <br>
+    <form action="{% url 'displayLocalData' %}" method="GET">
+        <button name='displayLocalData' type="submit" value="Submit">display local data</button>
+    </form>
+    <br>
+    <form action="{% url 'index' %}" method="get">
+        <button name="home" type="submit" value="Submit">home</button>
+    </form>
+</body>
+</html>

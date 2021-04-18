@@ -16,5 +16,8 @@
     <br>
     <p><b>Vaccinations Initiated:  </b>{{vacInit}}%</p>
     <p><b>Vaccinations Completed:  </b>{{vacComp}}%</p>
+    <form action="{% url 'index' %}" method="get">
+        <button name="home" type="submit" value="Submit">home</button>
+    </form>
 </body>
 </html>
