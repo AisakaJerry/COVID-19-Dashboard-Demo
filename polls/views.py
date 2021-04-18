@@ -12,6 +12,9 @@ from .forms import SelectStateForm
 import requests
 import json
 
+import geoip2.webservice
+from requests import get
+
 # Create your views here.
 def detail(request, question_id):
     return HttpResponse("You're looking at question %s." % question_id)
@@ -287,6 +290,15 @@ def getLocalData(request):    #if no data is added, build an empty form
     context={'form':form}
 
     return render(request, 'templates/getLocalData.html', context=context)
+
+def getLocalDatabyIP(request):
+    ip_address = get('https://api.ipify.org').text
+    print(ip_address)
+    with geoip2.webservice.Client(535906, '8illxg021TVu5EX1', host='geolite.info') as client:
+        response = client.city(ip_address)
+        print(response.subdivisions.most_specific.name)
+    context = {}
+    return render(request, 'templates/getLocalDataByIP.html', context=context)
 
 def displayLocalData(request):
     state_dict = dict((

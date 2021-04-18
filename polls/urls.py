@@ -39,4 +39,5 @@ urlpatterns = [
     path('syncdata/getApple/', views.getApple, name='getApple'),
     path('getLocalData/', views.getLocalData, name='getLocalData'),
     path('displayLocalData/',views.displayLocalData, name='displayLocalData'),
+    path('getLocalDataByIP/', views.getLocalDatabyIP, name='getLocalDataByIP'),
 ]
