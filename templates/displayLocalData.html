@@ -16,6 +16,12 @@
     <br>
     <p><b>Vaccinations Initiated:  </b>{{vacInit}}%</p>
     <p><b>Vaccinations Completed:  </b>{{vacComp}}%</p>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+        {{ plot_div | safe }}
+        </div>
+    </div>
     <form action="{% url 'index' %}" method="get">
         <button name="home" type="submit" value="Submit">home</button>
     </form>

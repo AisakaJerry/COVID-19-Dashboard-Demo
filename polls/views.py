@@ -14,6 +14,8 @@ import json
 
 import geoip2.webservice
 from requests import get
+from plotly.offline import plot
+from plotly.graph_objects import Scatter
 
 # Create your views here.
 def detail(request, question_id):
@@ -424,13 +426,25 @@ def displayLocalData(request):
     death = jsonFile['actuals']['deaths']
     vacInit = round(jsonFile['metrics']['vaccinationsInitiatedRatio'] * 100, 2)
     vacComp = round(jsonFile['metrics']['vaccinationsCompletedRatio'] * 100, 2)
+    lastUpdate = jsonFile['lastUpdatedDate']
+
+    url = 'https://api.covidactnow.org/v2/state/' + state + '.timeseries.json?apiKey=9fbed953db9f469badede64ddbb3e829'
+    r = requests.get(url, params=requests.get)
+    jsonFile = r.json()
+    newCases = [key['newCases'] for key in jsonFile['actualsTimeseries'][10:-2]]
+    newDate = [key['date'] for key in jsonFile['actualsTimeseries'][10:-2]]
+    plotData = Scatter(x=newDate, y=newCases, mode='lines', opacity=0.8, marker_color='red')
+    plot_div = plot([plotData],output_type='div')
+
     content = {
         'state':state_dict[state],
         'population':population, 
         'cases':cases, 
         'death':death,
         'vacInit':vacInit,
-        'vacComp':vacComp
+        'vacComp':vacComp,
+        'lastUpdate':lastUpdate,
+        'plot_div':plot_div
     }
     # form = localDataForm(content)
     # form.save()
