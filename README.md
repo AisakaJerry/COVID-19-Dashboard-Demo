@@ -3,6 +3,8 @@
 
 This is a Covid-19 dashboard demo which is provided for users to track their potential covid status and take essential actions. 
 
+Contributed by [Zeyuan Feng](https://github.com/AisakaJerry) and [Jiaze E](https://github.com/user833), group 2 of Object-Oriented Design CSCI_6234_10, George Washington University.
+
 For video demonstration, please follow this link (8 mins): [online demonstration video](https://drive.google.com/file/d/1Tuz0P3Q0V4U__5VIpqCihYRlStaFyjz-/view?usp=sharing)
  
 ## Required Packages
